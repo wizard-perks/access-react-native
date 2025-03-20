@@ -17,41 +17,50 @@ export default function WebView() {
       }
     >
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Access Travel SDK on React Native</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+        <ThemedText type="subtitle">Step 1: Go to Webview</ThemedText>
         <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
+          Navigate to the Webview tab to initialize the Access Travel SDK. The
+          SDK is embedded in a WebView component for seamless integration.
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
+        <ThemedText type="subtitle">Step 2: Generate Session Token</ThemedText>
         <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
+          You need to generate your own session token to use the SDK. Replace
+          the hard-coded token in the webview.tsx file with your own token.
+        </ThemedText>
+        <ThemedText style={styles.codeBlock}>
+          {`// Generate a token using cURL:
+curl -X POST https://api.accessdevelopment.com/v1/auth/token \\
+  -H "Content-Type: application/json" \\
+  -d '{"client_id": "YOUR_CLIENT_ID", "client_secret": "YOUR_CLIENT_SECRET"}'`}
+        </ThemedText>
+        <ThemedText>
+          Alternatively, you can use Postman to make the same request and obtain
+          your token.
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
+        <ThemedText type="subtitle">Step 3: Update the Token</ThemedText>
         <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+          Open{" "}
+          <ThemedText type="defaultSemiBold">app/(tabs)/webview.tsx</ThemedText>{" "}
+          and replace the sessionToken value with your newly generated token:
+        </ThemedText>
+        <ThemedText style={styles.codeBlock}>
+          {`const sessionToken = "YOUR_NEW_SESSION_TOKEN";`}
+        </ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Step 4: Run the SDK</ThemedText>
+        <ThemedText>
+          After updating the token, the SDK should initialize properly when you
+          navigate to the Webview tab. You'll see the Access Travel interface
+          with hotel booking capabilities and other travel services.
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
@@ -66,7 +75,7 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     gap: 8,
-    marginBottom: 8,
+    marginBottom: 16,
   },
   reactLogo: {
     height: 178,
@@ -74,5 +83,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: "absolute",
+  },
+  codeBlock: {
+    fontFamily: "SpaceMono",
+    fontSize: 12,
+    marginVertical: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 4,
   },
 });
